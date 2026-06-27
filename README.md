@@ -168,21 +168,24 @@ Ndumiso Nkosi - NdNkosi
 - SAS Academic Program
 
 
----
+## 🏗️ Architecture
 
-### Step 5: Create requirements.txt
-
-**File: `requirements.txt`**
-
-```txt
-pandas>=1.5.0
-numpy>=1.23.0
-matplotlib>=3.6.0
-seaborn>=0.12.0
-scikit-learn>=1.2.0
-psycopg2-binary>=2.9.0
-pg8000>=1.29.0
-boto3>=1.26.0
-jupyter>=1.0.0
-streamlit>=1.20.0
-openpyxl>=3.1.0
+```mermaid
+flowchart TD
+    A[📁 Local CSV Files] --> B[☁️ S3 Bucket<br>edu-data-raw-*]
+    B --> C[⚡ Lambda Function<br>load_education_data_to_rds]
+    C --> D[🗄️ RDS PostgreSQL<br>education_analytics]
+    D --> E[⚡ Lambda Function<br>send_daily_education_report]
+    E --> F[📧 Amazon SES<br>Send Email]
+    F --> G[📬 Stakeholder Inbox<br>Daily Reports]
+    
+    H[⏰ EventBridge<br>Daily 8:00 AM] --> E
+    
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style B fill:#ff9900,stroke:#232f3e,stroke-width:2px
+    style C fill:#ff9900,stroke:#232f3e,stroke-width:2px
+    style D fill:#527fff,stroke:#232f3e,stroke-width:2px
+    style E fill:#ff9900,stroke:#232f3e,stroke-width:2px
+    style F fill:#ff9900,stroke:#232f3e,stroke-width:2px
+    style G fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style H fill:#8c6b4a,stroke:#232f3e,stroke-width:2px
