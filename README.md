@@ -105,27 +105,6 @@ sa-education-analytics-pipeline/
 ├── README.md
 └── requirements.txt
 
-## 🏗️ Architecture
-
-```mermaid
-flowchart TD
-    A[📁 Local CSV Files] --> B[☁️ S3 Bucket]
-    B --> C[⚡ Lambda: Load Data]
-    C --> D[🗄️ RDS PostgreSQL]
-    D --> E[⚡ Lambda: Generate Report]
-    E --> F[📧 Amazon SES]
-    F --> G[📬 Email Inbox]
-    H[⏰ EventBridge Daily 8AM] --> E
-    
-    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style B fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
-    style C fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
-    style D fill:#527FFF,stroke:#232f3e,stroke-width:2px,color:#fff
-    style E fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
-    style F fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
-    style G fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style H fill:#8C6B4A,stroke:#232f3e,stroke-width:2px,color:#fff
-
 ## 🚀 Deployment
 
 ### Prerequisites
