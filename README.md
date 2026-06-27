@@ -105,6 +105,50 @@ sa-education-analytics-pipeline/
 ├── README.md
 └── requirements.txt
 
+## 🏗️ Architecture
+
+```mermaid
+flowchart TD
+    subgraph Data_Ingestion["📥 Data Ingestion"]
+        A[📁 Local CSV Files<br>27,858 Records] --> B[☁️ S3 Bucket<br>edu-data-raw-*]
+        B --> C[⚡ Lambda Function<br>load_education_data_to_rds<br>ETL Processing]
+    end
+
+    subgraph Storage["💾 Data Storage"]
+        C --> D[🗄️ RDS PostgreSQL<br>education_analytics<br>• student_performance<br>• student_term_summary]
+    end
+
+    subgraph Reporting["📊 Reporting & Alerts"]
+        D --> E[⚡ Lambda Function<br>send_daily_education_report<br>Generate Summary]
+        E --> F[📧 Amazon SES<br>Email Delivery]
+        F --> G[📬 Stakeholder Inbox<br>Daily Performance Reports]
+    end
+
+    subgraph Orchestration["⏰ Orchestration"]
+        H[⏰ EventBridge Rule<br>Schedule: 8:00 AM Daily] --> E
+        B -.->|S3 Trigger| C
+    end
+
+    subgraph Security["🔒 Security & Compliance"]
+        I[🔐 IAM Roles<br>Least Privilege]
+        J[🛡️ VPC Configuration]
+        K[🔑 Data Anonymization<br>SHA-256 Hashing]
+        L[📋 SAS Quality Control<br>Data Validation]
+    end
+
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style B fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
+    style C fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
+    style D fill:#527FFF,stroke:#232f3e,stroke-width:2px,color:#fff
+    style E fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
+    style F fill:#FF9900,stroke:#232f3e,stroke-width:2px,color:#fff
+    style G fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style H fill:#8C6B4A,stroke:#232f3e,stroke-width:2px,color:#fff
+    style I fill:#232f3e,stroke:#232f3e,stroke-width:2px,color:#fff
+    style J fill:#232f3e,stroke:#232f3e,stroke-width:2px,color:#fff
+    style K fill:#232f3e,stroke:#232f3e,stroke-width:2px,color:#fff
+    style L fill:#232f3e,stroke:#232f3e,stroke-width:2px,color:#fff
+
 ## 🚀 Deployment
 
 ### Prerequisites
