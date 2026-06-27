@@ -83,6 +83,7 @@ This project processes **27,858 student records** from 18 districts in Limpopo p
 | **Version Control** | Git, GitHub |
 
 ## 📁 Project Structure
+```markdown
 sa-education-analytics-pipeline/
 ├── scripts/
 │ ├── explore_data.py # Initial data exploration
@@ -106,6 +107,7 @@ sa-education-analytics-pipeline/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
+```
 
 ## 🚀 Deployment
 
