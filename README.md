@@ -19,11 +19,12 @@ This project processes **27,858 student records** from 18 districts in Limpopo p
 - ✅ Interactive dashboards (Power BI/Looker Studio)
 
 ## 🏗️ Architecture
+```markdown
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ SA EDUCATION ANALYTICS PIPELINE │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ │
-│ 📁 Local CSV Files │
+│ 📁 CSV Files │
 │ ↓ │
 │ ☁️ S3 Bucket (edu-data-raw-*) │
 │ ↓ (S3 Trigger) │
@@ -35,11 +36,12 @@ This project processes **27,858 student records** from 18 districts in Limpopo p
 │ ↓ │
 │ ⚡ Lambda: send_daily_education_report │
 │ ↓ (EventBridge: Daily at 8 AM) │
-│ 📧 SES: Daily Email Report │
+│ 📧 SES: Send Email │
 │ ↓ │
-│ 📬 Stakeholder Inbox │
+│ 📬 Stakeholder Inbox (Daily Reports) │
 │ │
 └─────────────────────────────────────────────────────────────────────────────┘
+```
 
 
 ## 📈 Key Insights
@@ -104,33 +106,6 @@ sa-education-analytics-pipeline/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
-
-```markdown
-## 🏗️ Architecture
-
-### Data Flow Diagram
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ SA EDUCATION ANALYTICS PIPELINE │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ │
-│ 📁 CSV Files │
-│ ↓ │
-│ ☁️ S3 Bucket (edu-data-raw-*) │
-│ ↓ (S3 Trigger) │
-│ ⚡ Lambda: load_education_data_to_rds │
-│ ↓ │
-│ 🗄️ RDS PostgreSQL (education_analytics) │
-│ ├── student_performance (27,858 records) │
-│ └── student_term_summary (27,858 records) │
-│ ↓ │
-│ ⚡ Lambda: send_daily_education_report │
-│ ↓ (EventBridge: Daily at 8 AM) │
-│ 📧 SES: Send Email │
-│ ↓ │
-│ 📬 Stakeholder Inbox (Daily Reports) │
-│ │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
 
 ## 🚀 Deployment
 
