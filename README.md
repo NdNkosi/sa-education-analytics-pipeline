@@ -105,32 +105,6 @@ sa-education-analytics-pipeline/
 ├── README.md
 └── requirements.txt
 
-```markdown
-## 🏗️ Architecture
-
-### Data Flow Diagram
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ SA EDUCATION ANALYTICS PIPELINE │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ │
-│ 📁 CSV Files │
-│ ↓ │
-│ ☁️ S3 Bucket (edu-data-raw-*) │
-│ ↓ (S3 Trigger) │
-│ ⚡ Lambda: load_education_data_to_rds │
-│ ↓ │
-│ 🗄️ RDS PostgreSQL (education_analytics) │
-│ ├── student_performance (27,858 records) │
-│ └── student_term_summary (27,858 records) │
-│ ↓ │
-│ ⚡ Lambda: send_daily_education_report │
-│ ↓ (EventBridge: Daily at 8 AM) │
-│ 📧 SES: Send Email │
-│ ↓ │
-│ 📬 Stakeholder Inbox (Daily Reports) │
-│ │
-└─────────────────────────────────────────────────────────────────────────────┘
-
 ## 🚀 Deployment
 
 ### Prerequisites
